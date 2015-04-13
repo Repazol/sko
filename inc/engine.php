@@ -704,8 +704,6 @@ function do_sape ($cod)
         define('_SAPE_USER', $cod);
     }
     require_once('sape/'._SAPE_USER.'/sape.php');
-    //require_once($_SERVER['DOCUMENT_ROOT'].'/'._SAPE_USER.'/sape.php');
-    //$sape = new SAPE_client();
     $o[ 'force_show_code' ] = true;
     $o['charset'] = 'UTF-8';
     $o['ignore_case'] = true;
