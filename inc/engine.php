@@ -580,7 +580,8 @@ function MakeViewGenerateContent (&$view)
  return $content;
 }
 function MakeTextSearch($par)
-{  $r='id=-1';
+{
+  global $page;  $r='id=-1';
   $p=explode(" ",$par);
   if (isset($_GET[$p[1]])) {$txt=$_GET[$p[1]];} elseif (isset($_POST[$p[1]])) {$txt=$_POST[$p[1]];} else {$txt='';}
 
@@ -590,11 +591,18 @@ function MakeTextSearch($par)
   if (count($a)>0)
   {
     //p2 like "%{PARAM txt}%"
+    $page['ts']='';
     $r='(';
     for ($i=0;$i<count($a);$i++)
     {
        if ($i>0) {$r.=" and ";}
-       $r.=$p[0].' like "%'.$a[$i].'%"';
+       $w=$a[$i];
+       $l=mb_substr($w,-1,1,"utf8");
+       $page['ts'].=$w.'->'.$l;
+       $gl=($l=="а")||($l=="и")||($l=="я")||($l=="у")||($l=="е")||($l=="ю")||($l=="ы")||($l=="о");
+       if ($gl) {$w=mb_substr($w,0,-1,"utf8");}
+       $page['ts'].='->'.$w."\n";
+       $r.=$p[0].' like "%'.$w.'%"';
        if ($i>3) {break;}
     }
     $r.=')';
