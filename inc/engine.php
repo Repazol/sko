@@ -586,11 +586,8 @@ function MakeTextSearch($par)
   if (isset($_GET[$p[1]])) {$txt=$_GET[$p[1]];} elseif (isset($_POST[$p[1]])) {$txt=$_POST[$p[1]];} else {$txt='';}
 
   $a=str_word_count($txt, 1,"0123456789АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя");
-  //print_r($txt);
-  //print_r($a);
   if (count($a)>0)
   {
-    //p2 like "%{PARAM txt}%"
     $page['ts']='';
     $r='(';
     for ($i=0;$i<count($a);$i++)
