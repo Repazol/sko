@@ -1,0 +1,16 @@
+﻿admin
+engine
+upload
+user
+wp-admin
+manager
+PMA
+bitrix
+netcat
+modules
+wp-content
+phpmyadmin
+edit
+xmlrpc
+configuration
+node

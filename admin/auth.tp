@@ -1,0 +1,18 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>{<{TITLE}>}</title>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <!--[if IE]><script src="js/html5.js"></script><![endif]-->
+  <script type="text/javascript" src="js/jquery.snippet.min.js"></script>                         <!-- SNIPPET -->
+  <script type="text/javascript" src="js/kickstart.js"></script>                                  <!-- KICKSTART -->
+  <link rel="stylesheet" type="text/css" href="css/kickstart.css" media="all" />                  <!-- KICKSTART -->
+  {<{HEAD_HTML}>}
+</head>
+
+<body onLoad="Delay();">
+{{{admininfo}}}
+</body>
+</html>
+
+

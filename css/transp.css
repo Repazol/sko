@@ -1,0 +1,127 @@
+.flabel {
+  text-align:right;
+  font-weight:bold;
+  font-size:10pt;
+  width:120px;
+}
+.ffield {
+  width:400px;
+}
+
+.ffieldinp {
+  width:99%;
+  font-size:9pt;
+border:solid 1px #000000;
+-moz-border-radius: 0px;
+-webkit-border-radius: 0px;
+border-radius: 0px;
+}
+
+.cargofields {
+  font-size:9pt;
+border:solid 1px #000000;
+-moz-border-radius: 0px;
+-webkit-border-radius: 0px;
+border-radius: 0px;
+padding: 3px 0;
+}
+
+.della-top-menu {
+  color: #276a99;
+  font: bold 12px Tahoma,Verdana,Arial,Helvetica,sans-serif;
+  text-decoration: none;
+
+}
+
+.addfield {
+  font: 10px Tahoma,Verdana,Arial,Helvetica,sans-serif;
+  width:250px;
+
+}
+
+.cargo {
+  border: 1px solid black;
+}
+
+.cargo td{
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+
+}
+
+.t-dt {
+  width:80px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-cargo {
+  width:120px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-citys {
+  width:200px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-wv {
+  width:90px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-price {
+  width:100px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-add {
+  width:120px;
+  vertical-align: top;
+  border-bottom: 1px solid BurlyWood;
+}
+.t-note {
+ vertical-align: top;
+ border-bottom: 1px solid BurlyWood;
+}
+
+
+.search-form {  background:BurlyWood;
+  border-bottom:0px;
+  width:auto;
+}
+.search-res {  background-color:Cornsilk;
+  border: 1px solid BurlyWood;
+}
+.search-combo {
+  width:200px;
+}
+
+.search-dt {  font-size:9pt;
+  color:black;
+  vertical-align:top;
+}
+.search-cargo {
+  font-size:11pt;
+  vertical-align:top;
+  color:black;
+  font-weight:bold;
+}
+.search-citys {
+  font-size:11pt;
+  vertical-align:top;
+  color:black;
+  font-weight:bold;
+}
+
+.search-cargoadd {
+  font-size:9pt;
+  vertical-align:top;
+  color:gray;
+
+}
+
+.search-table {  width:auto;
+  border-spacing: 10px;
+  border-collapse: separate;
+  margin:0;
+}

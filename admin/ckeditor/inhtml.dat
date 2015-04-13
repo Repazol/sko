@@ -1,0 +1,16 @@
+<script type="text/javascript">
+var ckeditor1 = CKEDITOR.replace('editor1');
+
+AjexFileManager.init({returnTo: 'ckeditor', editor: ckeditor1, skin: 'light'});
+
+
+AjexFileManager1.init({
+	returnTo: 'function',
+	skin: 'light'
+});
+
+function insertValue(filePath) {
+	document.getElementById('srcFile_function').value = filePath;
+	return;
+}
+</script>

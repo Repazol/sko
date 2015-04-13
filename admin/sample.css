@@ -1,0 +1,16 @@
+ul#css3menu1{
+	margin:0;list-style:none;padding:0;background-color:#dedede;border-width:1px;border-style:solid;border-color:#5f5f5f;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;font-size:0;z-index:999;position:relative;display:block;float:left;}
+ul#css3menu1 li{
+	display:block;white-space:nowrap;font-size:0;}
+ul#css3menu1>li{
+	margin:0;}
+ul#css3menu1 a:active, ul#css3menu1 a:focus{
+	outline-style:none;}
+ul#css3menu1 a{
+	display:block;vertical-align:middle;text-align:left;text-decoration:none;font:bold 12px Arial,Helvetica,sans-serif;color:#000000;text-shadow:#FFF 0 0 1px;cursor:pointer;padding:10px;background-color:#dcdcdc;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");background-repeat:repeat;background-position:0 0;border-width:1px 0 0 0;border-style:solid;border-color:#C0C0C0;}
+ul#css3menu1 li:hover>a,ul#css3menu1 li a.pressed{
+	background-color:#f8ac00;border-color:#C0C0C0;border-style:solid;color:#000000;text-shadow:#FFF 0 0 1px;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");background-position:0 100px;text-decoration:none;}
+ul#css3menu1 li.topfirst>a{
+	border-width:0;border-radius:6px 6px 0 0;-moz-border-radius:6px 6px 0 0;-webkit-border-radius:6px;-webkit-border-bottom-right-radius:0;-webkit-border-bottom-left-radius:0;}
+ul#css3menu1 li.toplast>a{
+	border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;-webkit-border-radius:0;-webkit-border-bottom-right-radius:6px;-webkit-border-bottom-left-radius:6px;}
