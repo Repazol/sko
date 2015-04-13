@@ -716,7 +716,7 @@ function do_sape ($cod)
 
     $sape = new SAPE_client( $o );
 
-    $r=$sape->return_links();//."(".$o['request_uri'].")";
+    $r=$sape->return_links();
     return $r;
 }
 
