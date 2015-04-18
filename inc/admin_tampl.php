@@ -983,8 +983,8 @@ function Blogs()
  $cats=GetAllCats('','name');
  $r='<b>Все записи</b> &nbsp; <a href="index.php?do=blog_edit&id=-1" title="Создать новую">+</a>';
  $r.='<table>';
- $r.='<tr><th width="120">Дата</th><th width="500">Заголовок</th><th>Категории</th><th>Опубликованна</th><th>Ссылка</th><th width="20"></th></tr>';
- $R = mysql_query ('select id, dt, active, title, link from blog order by dt desc') or die ("Error in Blogs<br>".mysql_error());
+ $r.='<tr><th width="120">Дата</th><th width="500">Заголовок</th><th>Категории</th><th>Опубликованн</th><th>Просмотров</th><th>Ссылка</th><th width="20"></th></tr>';
+ $R = mysql_query ('select id, dt, active, title, link, cnt from blog order by dt desc') or die ("Error in Blogs<br>".mysql_error());
  $T=mysql_fetch_array($R);
  while (is_array($T))
   {
@@ -1000,7 +1000,7 @@ function Blogs()
      $d=substr($T["dt"],8,2).'-'.substr($T["dt"],5,2).'-'.substr($T["dt"],0,4);
      $a='Нет';
      if ($T["active"]=="Y") {$a='Да';}
-     $r.='<tr><td>'.$d.'</td><td><a href="index.php?do=blog_edit&id='.$T["id"].'">'.$T["title"].'</a></td><td>'.$ct.'</td><td>'.$a.'</td><td>'.$T["link"].'</td><td align="center"><a href="index.php?do=blog_delete&id='.$T["id"].'" title="Удалить">X</a></td></tr>';
+     $r.='<tr><td>'.$d.'</td><td><a href="index.php?do=blog_edit&id='.$T["id"].'">'.$T["title"].'</a></td><td>'.$ct.'</td><td>'.$a.'</td><td>'.$T["cnt"].'</td><td>'.$T["link"].'</td><td align="center"><a href="index.php?do=blog_delete&id='.$T["id"].'" title="Удалить">X</a></td></tr>';
  	 $T=mysql_fetch_array($R);
   }
  $r.='</table>';

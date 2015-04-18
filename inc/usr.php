@@ -53,7 +53,7 @@ function AuthCreateNullUser()
   }
     else
     {
-      if (isset($_COOKIE['sid'])) {  	     $u['sid']=$_COOKIE['sid'];
+      if (isset($_COOKIE['sid'])) {  	     $u['sid']=mysql_real_escape_string($_COOKIE['sid']);
     	 $u=AuthGetUserBySID ($u);
     }
 

@@ -14,7 +14,7 @@ if ($pref['MAX_IP']!='0')
 
 
   $put=true;
-  $ip=$_SERVER['REMOTE_ADDR'];
+  $ip=getClientIP();
   $R = mysql_query ('select ip, allow,cnt from ipslog where (ip="'.$ip.'")') or die ("Error in TestMaxIP<br>".mysql_error());
   $T=mysql_fetch_array($R);
   if (!isset($T['ip']))
@@ -31,7 +31,7 @@ if ($pref['MAX_IP']!='0')
         $sql='update ipslog set cnt=cnt+1 where (ip="'.$ip.'")';
       }
   if ($put) {
-     $R = mysql_query ($sql) or die ("Error in TestMaxIP<br>".mysql_error());
+     $R = mysql_query ($sql) or die ("Error in TestMaxIP<br>".mysql_error().'<br>'.$sql);
   }
 
 }
