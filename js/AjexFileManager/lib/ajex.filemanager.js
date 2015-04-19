@@ -26,6 +26,7 @@ var $cfg = {
 	view:		{list: false, thumb: true},
 	menu:	{file: {}, folder: {}},
 	contextmenu: true,
+	tag:0,
 	cutKey: 15,
 	dir: '',
 	file: '',
@@ -546,6 +547,7 @@ function bindFileContextMenu()
 
 function _setReturnData(input, data)
 {
+	console.log ("Rez:",input," tag:",$cfg.tag);
 	switch($cfg.returnTo) {
 		case 'ckeditor':
 			window.top.opener['CKEDITOR'].tools.callFunction(parseUrl('CKEditorFuncNum'), input, data);
@@ -569,8 +571,12 @@ function _setReturnData(input, data)
 				if ('$' == $cfg.returnTo.substr(0, 1)) {
 					var objInput = $cfg.returnTo.substr(1);
 					window.top.opener.document.getElementById(objInput).value = input;
+					window.top.opener["imgch"](input,objInput,$cfg.tag);
+					//alert("Run");
+
+					//window.top.opener["imgch"](input,objInput,$cfg.tag);
 				} else {
-					window.top.opener[$cfg.returnTo](input);
+					window.top.opener[$cfg.returnTo](input,$cfg.tag);
 				}
 				window.close();
 			} catch(e) {

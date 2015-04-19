@@ -26,11 +26,13 @@ function GenereateDesign($id_q,$idu)
   $acells='';
   $atextal='text-align:left;';
   if ($a_orintation=="H") {$atextal='text-align:center;';}
+  $n=0;
   foreach($answ as $key => $ans)
   {
-    $cell='<td style="'.$atextal.'"><button id="qbth" class="qbth" style="width:99%">'.$ans.'</button></td>';
+    $cell='<td style="'.$atextal.'"><button id="qbth'.$n.'" class="qbth" style="width:99%">'.$ans.'</button></td>';
     if ($a_orintation=="H") {$acells.=$cell;}
     if ($a_orintation=="V") {$acells.='<tr>'.$cell.'</tr>';}
+    $n++;
   }
   $anshtml.=$acells.'</table>';
   $tmpl=str_replace('%ANSWERS%',$anshtml,$tmpl);
@@ -81,15 +83,42 @@ function SkoGenerateBGImage($bgimage, $btns=false)
 {  global $page;
   $p='';
   if ($btns) {$p='b';}
-  $page['head'].='<script src="js/AjexFileManager/ajex'.$p.'1.js" type="text/javascript"></script>';
   $page['vars']['bgsel'.$p]="\n".'<input style="width:220px; margin:0 0 0 0;display:inline;" type="text" id="srcFile_function'.$p.'" name="srcFile_function'.$p.'" value="'.$bgimage.'" size="50" />&nbsp;';
-  $page['vars']['bgsel'.$p].='<input style="margin:0 0 0 0;display:inline;" type="button" value="Выбрать" onclick="AjexFileManager'.$p.'1.open({returnTo: \'insertValue'.$p.'\'});" />&nbsp;
+  $page['vars']['bgsel'.$p].='<input style="margin:0 0 0 0;display:inline;" type="button" value="Выбрать" onclick="AjexFileManager1.open({returnTo: \'insertValue'.$p.'\'});" />&nbsp;
   <input style="margin:0 0 0 0;display:inline;" type="button" value="Без фона" onclick="SetCanvaseBG'.$p.'(\'\');" /><br>'."\n";
 
-  $page['vars']['bgsel'.$p].='<script type="text/javascript">InitBGSelect'.$p.'();</script>';
   $r='%%bgsel'.$p.'%%';
 
   return $r;
+}
+function ButtonsImageSelect($answs, $btnimages)
+{
+  global $page;  $r='<table width="100%">';
+  $answ=explode(chr(13),$answs);
+  $bi=explode('|',$btnimages);
+  $n=0;
+  foreach($answ as $key => $ans)
+  {
+    $im='';
+    if (isset($bi[$n])) {$im=$bi[$n];}
+    $r.='<tr><td>'.$ans.':<input class="btnimg" n="'.$n.'" id="btnimg'.$n.'" name="btnimg'.$n.'" value="'.$im.'" type="hidden"></td>';
+    $r.='<td width="50"><img id="bimg'.$n.'" style="width:30px;height:30px;" src="'.$im.'" onclick="AjexFileManager1.open({returnTo: \'$btnimg'.$n.'\'});"></td></tr>';
+    $n++;
+  }
+  $r.='</table><input id="btnimages" name="btnsimages" type="hidden" value="'.$btnimages.'">';
+  $r.='<script>';
+  $r.='
+  function imgch(fn,a,b)
+  {  	console.log ("imgch:",fn," a:",a," b:",b);
+    var n = $("#"+a).attr("n");
+    console.log ("Change:",n);
+    $("#bimg"+n).attr("src",$("#"+a).val());
+    SetColors();
+  }';
+  $r.='</script>';
+  $page['vars']['btnimgsel']=$r;
+
+  return '%%btnimgsel%%';
 }
 function SkoGenerateDesignWorkA($id_q,$idu)
 {
@@ -97,10 +126,13 @@ function SkoGenerateDesignWorkA($id_q,$idu)
   $page['head'].='<link href="css/evol.colorpicker.css" rel="stylesheet" />';
   $page['head'].='<script src="js/evol.colorpicker.js" type="text/javascript"></script>';
   $page['head'].='<script src="js/qdesign.js" type="text/javascript"></script>';
+  $page['head'].='<script src="js/AjexFileManager/ajex1.js" type="text/javascript"></script>';
 
-  $sql='select id_q, tmpl,bgcolor,btncolor,qfont,afont, q_offs, a_offs,bgimage,bgbimage from sko_questions where (id='.$id_q.' and id_user='.$idu.')';
+  $sql='select id_q, tmpl,bgcolor,btncolor,qfont,afont, q_offs, a_offs,bgimage,bgbimage,answers,btnimages,btnpadding from sko_questions where (id='.$id_q.' and id_user='.$idu.')';
   $R = mysql_query_my ($sql) or die ("Error in SkoGenerateDesignWorkA<br>".mysql_error());
   $T=mysql_fetch_array($R);
+  $answers=$T['answers'];
+  $btnimages=$T['btnimages'];
   $id_quest=$T['id_q'];
   $id_tmpl=$T['tmpl'];
   $qfont=$T['qfont'];
@@ -113,6 +145,7 @@ function SkoGenerateDesignWorkA($id_q,$idu)
 
   $qo=explode ('|',$T['q_offs']);
   $ao=explode ('|',$T['a_offs']);
+  $bp=explode ('|',$T['btnpadding']);
   $offsx1=$qo[0];
   $offsy1=$qo[1];
   $offsx2=$ao[0];
@@ -143,6 +176,8 @@ function SkoGenerateDesignWorkA($id_q,$idu)
 
   $qtoffs=SkoGenerateOffs($offsx1,$offsy1,'q');
   $qtoffs1=SkoGenerateOffs($offsx2,$offsy2,'a');
+  $btpadd=SkoGenerateOffs($bp[0],$bp[1],'bp');
+
   $bgimage=SkoGenerateBGImage($bgimage);
   $bgbimage=SkoGenerateBGImage($bgbimage,true);
 
@@ -157,11 +192,16 @@ function SkoGenerateDesignWorkA($id_q,$idu)
   $r.='<tr><td>Фон кнопок:</td><td>'.$bgbimage.'</td></tr>';
   $r.='<tr><td>Шрифт ответов:</td><td>'.$anfont.'</td></tr>';
   $r.='<tr><td>Смещение:</td><td>'.$qtoffs1.'</td></tr>';
+  $r.='<tr><td>Отступы:</td><td>'.$btpadd.'</td></tr>';
 
+  $r.='<tr><td colspan="2"><hr><center><b>Картинки ответов</b></td></tr>';
+  $r.='<tr><td colspan="2">'.ButtonsImageSelect($answers,$btnimages).'</td></tr>';
   $r.='</table>';
   $r.='<input name="docomment" type="hidden" value="design-post">';
   $r.='<input class="mybtn" type="submit" value="Сохранить">';
   $r.="</form>";
+  $page['vars']['InitFM']='<script type="text/javascript">InitBGSelect();</script>';
+  $r.="%%InitFM%%";
   return $r;
 }
 function SkoDesignPost($id_q,$idu)
@@ -185,12 +225,18 @@ function SkoDesignPost($id_q,$idu)
   $a_offsy=GetPostGetParamINT('a_offsy');
   $bgimage=GetPostGetParamSTR('srcFile_function');
   $bgbimage=GetPostGetParamSTR('srcFile_functionb');
+  $btnsimages=GetPostGetParamSTR('btnsimages');
+
+  $p_offsx=GetPostGetParamINT('bp_offsx');
+  $p_offsy=GetPostGetParamINT('bp_offsy');
+
 
   $qf=$q_font.'|'.$q_size.'|'.$q_color.'|'.$q_shcolor.'|'.$q_shsize;
   $af=$a_font.'|'.$a_size.'|'.$a_color;
   $q_offs=$q_offsx.'|'.$q_offsy;
   $a_offs=$a_offsx.'|'.$a_offsy;
-  $sql='update sko_questions set tmpl='.$tmpl.',bgcolor="'.$bgcolor.'",btncolor="'.$btncolor.'",qfont="'.$qf.'",afont="'.$af.'",q_offs="'.$q_offs.'",a_offs="'.$a_offs.'",bgimage="'.$bgimage.'", bgbimage="'.$bgbimage.'" where (id='.$id_q.' and id_user='.$idu.')';
+  $p_offss=$p_offsx.'|'.$p_offsy;
+  $sql='update sko_questions set tmpl='.$tmpl.',bgcolor="'.$bgcolor.'",btncolor="'.$btncolor.'",qfont="'.$qf.'",afont="'.$af.'",q_offs="'.$q_offs.'",a_offs="'.$a_offs.'",bgimage="'.$bgimage.'", bgbimage="'.$bgbimage.'", btnimages="'.$btnsimages.'",btnpadding="'.$p_offss.'" where (id='.$id_q.' and id_user='.$idu.')';
   $R = mysql_query_my ($sql) or die ("Error in SkoDesignPost<br>".mysql_error());
 
   return $r;

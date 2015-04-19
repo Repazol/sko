@@ -44,6 +44,7 @@ function SetColors()
 
  var BGColor = $("#cpBoth").colorpicker("val");
  var BTNColor = $("#cpBoth1").colorpicker("val");
+ if (BTNColor==""||BTNColor==null) {BTNColor="transparent";}
  var QSTColor = $("#cp_q").colorpicker("val");
  var QSTSize = $("#q_size").spinner( "value" );
  var QSTFont = $("#q_font").val();
@@ -58,6 +59,11 @@ function SetColors()
  //var AX = $("#a_offsx").val();
  var AY = $("#a_offsy").val();
 
+ //buttons paddings
+ var BX = $("#bp_offsx").val();
+ var BY = $("#bp_offsy").val();
+
+
  var bgimg=$("#srcFile_function").val();
  if (bgimg=="")
  {
@@ -68,18 +74,6 @@ function SetColors()
   $('#canvas').css("backgroundImage", "url("+bgimg+")");
   $('#canvas').css('background-repeat','no-repeat');
   $('#canvas').css("background-size", "100% 100%");
-}
-
- var bgimgb=$("#srcFile_functionb").val();
- if (bgimgb=="")
- {
-   $('.qbth').css("backgroundImage", "none");
-   $('#srcFile_function').val("");
- }
-   else {
-  $('.qbth').css("backgroundImage", "url("+bgimgb+")");
-  $('.qbth').css('background-repeat','no-repeat');
-  $('.qbth').css("background-size", "100% 100%");
 }
 
  $('#canvas').css("background-color", BGColor);
@@ -103,6 +97,34 @@ function SetColors()
  $('.qbth').css("font-family", ANSFont);
  $('.qbth').css("color", ANSColor);
  $('.qbth').css("background-color", BTNColor);
+ console.log ('bcolor:',BTNColor);
+
+ $('.qbth').css("padding-left", BX+"px");
+ $('.qbth').css("padding-top", BY+"px");
+
+ var bgimgb=$("#srcFile_functionb").val();
+ if (bgimgb=="")
+ {
+   bgimgb="none";
+ }
+  $('.qbth').css("backgroundImage", "url("+bgimgb+")");
+  $('.qbth').css('background-repeat','no-repeat');
+  $('.qbth').css("background-size", "100% 100%");
+
+
+ var bi='';
+ $('.btnimg').each(function(){   var v=$(this).val();
+   bi=bi+v+"|";
+   var n=$(this).attr("n");
+   var id='#qbth'+n;
+   if (v=="") {v=bgimgb;}
+  $(id).css("backgroundImage", "url("+v+")");
+  $(id).css('background-repeat','no-repeat');
+  $(id).css("background-size", "100% 100%");
+ });
+ $('#btnimages').val(bi);
+ console.log ('im:',bi);
+
 
 
 
@@ -162,13 +184,13 @@ function InitBGSelect()
 	skin: "light"
 });
 }
-function InitBGSelectb()
+/* function InitBGSelectb()
 {
 AjexFileManagerb1.init({
 	returnTo: "function",
 	skin: "light"
 });
-}
+} */
 
 function insertValue(filePath) {
 	document.getElementById("srcFile_function").value = filePath;
@@ -188,6 +210,20 @@ AjexFileManager1.init({
 	skin: "light"
 });
 }
+function insertValueEx(filePath, id, idimage) {
+
+ console.log("Path:",filePath,' id:',id,' idimage:',idimage);
+ $('#'+id).val(filePath);
+ var bgimg=$("#"+idimage);
+ if (filePath=="")
+ {
+   filePath="none";
+ }
+ bgimg.attr('src', filePath);
+ SetColors();
+ return;
+}
+
 function insertValue(filePath) {
 	document.getElementById("srcFile_function").value = filePath;
 	SetCanvaseBG (filePath);
