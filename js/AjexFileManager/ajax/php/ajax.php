@@ -90,7 +90,7 @@ date_default_timezone_set('Europe/Moscow');
 $id_u=GetUserIDBySID();
 //echo "Ajax.php: id_u:$id_u<br>";
 if ($id_u==""||$id_u==-1) {die("Err");}
-$cfg['url']	= 'sko/uploads'. DIR_SEP .$id_u;
+$cfg['url']	= 'uploads'. DIR_SEP .$id_u;
 $cfg['root']	= $_SERVER['DOCUMENT_ROOT'] . DIR_SEP . $cfg['url'];			// http://www.yousite.com/upload/		absolute path
 //echo "Ajax.php: path:".$cfg['root']."<br>";
 if (!file_exists($cfg['root'])) {

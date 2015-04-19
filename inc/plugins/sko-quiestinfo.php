@@ -79,7 +79,7 @@ function SkoGetQuestInfo($par)
    $r.='<div class="quest-name" id="quest-name">'.$T['name'].'</div>';
    $r.='<div class="quest-change" id="quest-change">'.$T['change'].'</div>';
    $n=0;
-   $sql='select id,question,answers,pos,tmpl,bgcolor,btncolor,qfont,afont, q_offs, a_offs,`condition` from sko_questions where (id_q='.$idq.' and is_del="N") order by pos';
+   $sql='select id,question,answers,pos,tmpl,bgcolor,btncolor,qfont,afont, q_offs, a_offs,`condition`,bgimage,bgbimage,btnimages,btnpadding from sko_questions where (id_q='.$idq.' and is_del="N") order by pos';
    $R = mysql_query_my ($sql) or $error="Internal server error".mysql_error();
    $T=mysql_fetch_array($R);
    while (is_array($T))

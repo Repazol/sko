@@ -218,7 +218,8 @@ function SkoDesignPost($id_q,$idu)
   $a_font=GetPostGetParamSTR('a_font');
   $a_size=GetPostGetParamINT('a_size');
   $a_color=GetPostGetParamSTR('a_color');
-  $a_color=GetPostGetParamSTR('a_color');
+  $a_shcolor=GetPostGetParamSTR('a_shcolor');
+  $a_shsize=GetPostGetParamINT('a_shsize');
   $q_offsx=GetPostGetParamINT('q_offsx');
   $q_offsy=GetPostGetParamINT('q_offsy');
   $a_offsx=GetPostGetParamINT('a_offsx');
@@ -232,7 +233,7 @@ function SkoDesignPost($id_q,$idu)
 
 
   $qf=$q_font.'|'.$q_size.'|'.$q_color.'|'.$q_shcolor.'|'.$q_shsize;
-  $af=$a_font.'|'.$a_size.'|'.$a_color;
+  $af=$a_font.'|'.$a_size.'|'.$a_color.'|'.$a_shcolor.'|'.$a_shsize;
   $q_offs=$q_offsx.'|'.$q_offsy;
   $a_offs=$a_offsx.'|'.$a_offsy;
   $p_offss=$p_offsx.'|'.$p_offsy;
