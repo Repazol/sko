@@ -558,7 +558,7 @@ function MakeViewGenerateContent (&$view)
      {        $rec='<td '.$view['table_td'].'>'.$rec.'</td>';
         if ($col==1) {$rec='<tr>'.$rec;}
         if ($col==$view['columns']) {$rec=$rec.'</tr>';$col=0;}
-        $rec=str_replace(chr(13), '<br>', $rec);
+        //$rec=str_replace(chr(13), '<br>', $rec);
      }
 
      $content.=$rec;

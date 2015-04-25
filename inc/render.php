@@ -377,7 +377,7 @@ function site_render()
   $tampl=GetTampleByID($page["tampl"]);
   if ($page["tampl"]==-1) {$tampl["body"]='{MAIN}';}
   $r=$tampl["body"];
-  $r=str_replace("{MAIN}", replaceBBCode($page["body"]), $r);
+  $r=str_replace("{MAIN}", $page["body"], $r);
   $page['timing'].='BeginRender:'.sprintf('%.4F сек.', microtime(true) - $start).'<br>';
   $r=doSiteRender($r);
   $page['timing'].='EndRender:'.sprintf('%.4F сек.', microtime(true) - $start).'<br>';
