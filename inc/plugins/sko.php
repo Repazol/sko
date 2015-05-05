@@ -18,8 +18,7 @@ function PluginRender($cmd,$par,$cr)
        $(function() {       	setTimeout(function(){
             $("#opener").trigger("click");
             },1000)       });
-       </script>
-     ';
+       </script>';
    }
 
  if ($cmd=="SKO-GETQUESTINFO") {include_once("sko-quiestinfo.php"); $cr=SkoGetQuestInfo($par);}

@@ -18,18 +18,24 @@ function GenereateDesign($id_q,$idu)
   $tmplname='';$a_orintation='';  $sql='select * from sko_questions where (id='.$id_q.' and id_user='.$idu.')';
   $R = mysql_query_my ($sql) or die ("Error in GenereateDesign<br>".mysql_error());
   $T=mysql_fetch_array($R);
-  $tmpl=SkoGetTample($T['tmpl'],$tmplname,$a_orintation);
+  $id_tmpl=$T['tmpl'];
+  $tmpl=SkoGetTample($id_tmpl,$tmplname,$a_orintation);
   $qst='<div id="offset1" style="display:block;"></div><div id="quest" class="quest">'.$T['question'].'</div>';
   $tmpl=str_replace('%QUESTION%',$qst,$tmpl);
   $answ=explode(chr(13),$T['answers']);
   $anshtml='<div id="offset2" style="display:block;"></div><table style="width:100%;border-spacing:5 20px;">';
   $acells='';
   $atextal='text-align:left;';
-  if ($a_orintation=="H") {$atextal='text-align:center;';}
+  if ($a_orintation=="H")
+  {  	$atextal='text-align:center;';
+    $wp=98/(count($answ)+1);
+    $atextal.='width:'.$wp.'%;';
+  }
+
   $n=0;
   foreach($answ as $key => $ans)
   {
-    $cell='<td style="'.$atextal.'"><button id="qbth'.$n.'" class="qbth" style="width:99%">'.$ans.'</button></td>';
+    $cell='<td style="'.$atextal.'"><button id="qbth'.$n.'" class="qbth" style="width:98%;text-shadow: #000 0px 0px 2px;">'.$ans.'</button></td>';
     if ($a_orintation=="H") {$acells.=$cell;}
     if ($a_orintation=="V") {$acells.='<tr>'.$cell.'</tr>';}
     $n++;
@@ -102,7 +108,8 @@ function ButtonsImageSelect($answs, $btnimages)
     $im='';
     if (isset($bi[$n])) {$im=$bi[$n];}
     $r.='<tr><td>'.$ans.':<input class="btnimg" n="'.$n.'" id="btnimg'.$n.'" name="btnimg'.$n.'" value="'.$im.'" type="hidden"></td>';
-    $r.='<td width="50"><img id="bimg'.$n.'" style="width:30px;height:30px;" src="'.$im.'" onclick="AjexFileManager1.open({returnTo: \'$btnimg'.$n.'\'});"></td></tr>';
+    $r.='<td width="50"><img id="bimg'.$n.'" style="width:30px;height:30px;" src="'.$im.'" onclick="AjexFileManager1.open({returnTo: \'$btnimg'.$n.'\'});"></td>';
+    $r.='<td><a href="#" onclick="ClearImage ('.$n.');">X</a></td></tr>';
     $n++;
   }
   $r.='</table><input id="btnimages" name="btnsimages" type="hidden" value="'.$btnimages.'">';
@@ -280,7 +287,7 @@ function SkoDesign($par)
 
   $wa=SkoGenerateDesignWorkA($id_q,$idu);
   $r.='<table><tr><td style="width:230px;vertical-align:top;">'.$wa.'</td>';
-  $r.='<td>';
+  $r.='<td style="vertical-align:top;">';
   $r.=$dev.'<div id="canvas" style="width:500px;height:250px;display:block;border: 14px #000000 solid;border-radius: 20px 20px 20px 20px;-webkit-border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 20px 20px 20px;">';
   $r.=GenereateDesign($id_q,$idu);
   $r.='</div></td></tr></table>';

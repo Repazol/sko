@@ -55,6 +55,8 @@ function GetSitePref ()
   if (!isset($a["view_pages_n"])) {$sq='insert into pref (par, val) values ("view_pages_n","Следующая")';$R = mysql_query ($sq) or die ("Error in GetSitePref<br>".mysql_error().'<br>'.$sq);$a["SM_SQL"]=$sq;}
   if (!isset($a["view_pages_l"])) {$sq='insert into pref (par, val) values ("view_pages_l","Последняя")';$R = mysql_query ($sq) or die ("Error in GetSitePref<br>".mysql_error().'<br>'.$sq);$a["SM_SQL"]=$sq;}
   if (!isset($a["MAX_IP"])) {$sq='insert into pref (par, val) values ("MAX_IP","0")';$R = mysql_query ($sq) or die ("Error in GetSitePref<br>".mysql_error().'<br>'.$sq);$a["MAX_IP"]='0';}
+  if (!isset($a["WP_USER"])) {$sq='insert into pref (par, val) values ("WP_USER","")';$R = mysql_query ($sq) or die ("Error in GetSitePref<br>".mysql_error().'<br>'.$sq);$a["WP_USER"]='0';}
+  if (!isset($a["WP_PASSW"])) {$sq='insert into pref (par, val) values ("WP_PASSW","")';$R = mysql_query ($sq) or die ("Error in GetSitePref<br>".mysql_error().'<br>'.$sq);$a["WP_PASSW"]='0';}
 
   return $a;
 }
@@ -80,6 +82,8 @@ function AdminPref ()
         if (isset($_POST['view_pages_n'])) $view_pages_n=addslashes($_POST['view_pages_n']);
         if (isset($_POST['view_pages_l'])) $view_pages_l=addslashes($_POST['view_pages_l']);
         if (isset($_POST['MAX_IP'])) $maxip=addslashes($_POST['MAX_IP']);
+        if (isset($_POST['WP_USER'])) $wpuser=addslashes($_POST['WP_USER']);
+        if (isset($_POST['WP_PASSW'])) $wppass=addslashes($_POST['WP_PASSW']);
 
         $R = mysql_query ('update pref set val="'.$name.'" where (par="NAME")') or die ("Error in AdminPref post<br>".mysql_error());
         $R = mysql_query ('update pref set val="'.$tamp.'" where (par="TAMPL")') or die ("Error in AdminPref post<br>".mysql_error());
@@ -96,6 +100,10 @@ function AdminPref ()
         $R = mysql_query ('update pref set val="'.$view_pages_n.'" where (par="view_pages_n")') or die ("Error in AdminPref post<br>".mysql_error());
         $R = mysql_query ('update pref set val="'.$view_pages_l.'" where (par="view_pages_l")') or die ("Error in AdminPref post<br>".mysql_error());
         $R = mysql_query ('update pref set val="'.$maxip.'" where (par="MAX_IP")') or die ("Error in AdminPref post<br>".mysql_error());
+
+        $R = mysql_query ('update pref set val="'.$wpuser.'" where (par="WP_USER")') or die ("Error in AdminPref post<br>".mysql_error());
+        $R = mysql_query ('update pref set val="'.$wppass.'" where (par="WP_PASSW")') or die ("Error in AdminPref post<br>".mysql_error());
+
         $r.=doNotice('Сохраненно');
      }
   $conf=GetSitePref();
@@ -146,6 +154,11 @@ function AdminPref ()
   $r.='<tr><td align="right">Предыдущая:</td><td><input name="view_pages_p" type="text" value="'.$conf['view_pages_p'].'" style="width:200px;"></td></tr>';
   $r.='<tr><td align="right">Следующая:</td><td><input name="view_pages_n" type="text" value="'.$conf['view_pages_n'].'" style="width:200px;"></td></tr>';
   $r.='<tr><td align="right">Последняя:</td><td><input name="view_pages_l" type="text" value="'.$conf['view_pages_l'].'" style="width:200px;"></td></tr>';
+  $r.='</tr></table></fieldset>';
+  $r.='<fieldset style="width:300px;"><legend>Whats App</legend>';
+  $r.='<table style="width:100%;">';
+  $r.='<tr><td align="right">Пользователь:</td><td><input name="WP_USER" type="text" value="'.$conf['WP_USER'].'"></td></tr>';
+  $r.='<tr><td align="right">Пароль:</td><td><input name="WP_PASSW" type="text" value="'.$conf['WP_PASSW'].'" style="width:200px;"></td></tr>';
   $r.='</tr></table></fieldset>';
   $r.='</div>';
   $r.='<input type="submit" value="Сохранить">';

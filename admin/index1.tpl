@@ -37,7 +37,8 @@
 <a href="index.php?do=fm">Файл менеджер</a></br>
 <a href="index.php?do=databases">Базыданных</a></br>
 <a href="index.php?do=mysql">MySql менеджер</a></br>
-<a href="index.php?do=mongol">Mongol</a>
+<a href="index.php?do=mongol">Mongol</a></br>
+<a href="index.php?do=whatsapp">Whats App</a></br>
 <hr>
 <a href="index.php?do=auth-users">Пользователи</a></br>
 <a href="index.php?do=auth-fields">Данные о пользователях</a></br>

@@ -225,6 +225,9 @@ function AdminInfo()
   // Mongol
   if ($do_res=='mongol') $r=MongolAdm();
 
+  if ($do_res=='whatsapp'||$do_res=='whatsapp-send'||$do_res=='whatsapp-recive') {include_once('whatsapp.php'); $r=WhatsAppAdm();}
+
+
   //Auth
   if ($do_res=='auth-users') {$r=AuthUsersListManager();};
   if ($do_res=='auth-fields') {$r=AuthUsersListFields();};

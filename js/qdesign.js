@@ -54,6 +54,9 @@ function SetColors()
  var ANSColor = $("#cp_a").colorpicker("val");
  var ANSSize = $("#a_size").spinner( "value" );
  var ANSFont = $("#a_font").val();
+ var AShColor = $("#cps_a").colorpicker("val");
+ var AShSize = $("#a_shsize").spinner( "value" );
+
  //var QX = $("#q_offsx").val();
  var QY = $("#q_offsy").val();
  //var AX = $("#a_offsx").val();
@@ -105,13 +108,13 @@ function SetColors()
  var bgimgb=$("#srcFile_functionb").val();
  if (bgimgb=="")
  {
-   bgimgb="none";
+   bgimgb="images/none.png";
  }
   $('.qbth').css("backgroundImage", "url("+bgimgb+")");
   $('.qbth').css('background-repeat','no-repeat');
   $('.qbth').css("background-size", "100% 100%");
-
-
+  $('.qbth').css("text-shadow",AShColor+" "+AShSize+"px "+AShSize+"px 2px");
+  console.log ('SH:',AShColor,AShSize);
  var bi='';
  $('.btnimg').each(function(){   var v=$(this).val();
    bi=bi+v+"|";
@@ -121,6 +124,7 @@ function SetColors()
   $(id).css("backgroundImage", "url("+v+")");
   $(id).css('background-repeat','no-repeat');
   $(id).css("background-size", "100% 100%");
+ 
  });
  $('#btnimages').val(bi);
  console.log ('im:',bi);
@@ -219,7 +223,7 @@ function insertValueEx(filePath, id, idimage) {
  {
    filePath="none";
  }
- bgimg.attr('src', filePath);
+ //bgimg.attr('src', filePath);
  SetColors();
  return;
 }
@@ -249,4 +253,11 @@ function SetCanvaseBGb (filePath)
  SetColors();
 }
 
+function ClearImage (n)
+{
+  $('#btnimg'+n).val("");
+  $('#bimg'+n).attr('src', "images/none.png");
+  SetColors();
 
+
+}
